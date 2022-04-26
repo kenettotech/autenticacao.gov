@@ -34,12 +34,12 @@
 ::======
 @set PTEID_DIR_7ZIP=C:\Program Files\7-Zip
 @set PTEID_DIR_CRYPTPDK=C:\Program Files (x86)\Windows Kits\10\Cryptographic Provider Development Kit
-@set PTEID_DIR_VS=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community
-@set PTEID_DIR_DOXYGEN=C:\Program Files\doxygen-1.8.15.windows.x64.bin
-@set PTEID_DIR_SWIG=C:\swigwin-4.0.1
-@set PTEID_DIR_JDK=C:\Program Files\Java\jdk-11.0.12
+@set PTEID_DIR_VS=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
+@set PTEID_DIR_DOXYGEN=C:\Program Files\doxygen\bin
+@set PTEID_DIR_SWIG=C:\ProgramData\chocolatey\lib\swig\tools\install\swigwin-4.0.1
+@set PTEID_DIR_JDK=C:\Program Files\OpenJDK\jdk-11.0.2
 @set PTEID_DIR_WIX=C:\Program Files (x86)\WiX Toolset v3.11
-@set PTEID_DIR_MSM=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.16.27012\MergeModules
+@set PTEID_DIR_MSM=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Redist\MSVC\14.16.27012\MergeModules
 
 :: Credentials
 ::======

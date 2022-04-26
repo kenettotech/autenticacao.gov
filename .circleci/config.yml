@@ -3,36 +3,40 @@ orbs:
   win: circleci/windows@4.1.1
 jobs:
   build:
-    working_directory: ~/project
+    working_directory: ~/project/pteid-mw-pt/windows
     executor:
       name: win/default
     steps:
       - checkout
       - restore_cache:
-          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+        key: choco-downloads-{{ checksum "packages.config" }}
       - restore_cache:
-          key: gradle-caches-{{ checksum "build.gradle" }}
+        key: external-libs-{{ checksum "external-libs/versions.txt" }}
       - restore_cache:
-          key: choco-downloads-{{ checksum "windows/packages.config" }}
-      - run: 'choco config set --name "cacheLocation" --value "windows/chocoTemp"'
-      - run: 'choco install windows/packages.config'
-      - run: './gradlew wrapper ":windows:jpackage" --no-daemon'
+        key: cpdk-{{ checksum "install_cpdk.ps1" }}
+      - restore_cache:
+        key: platform_sdk-{{ checksum "install_platform_sdk.ps1" }}
+      - run: 'choco config set --name "cacheLocation" --value "chocoTemp"'
+      - run: 'choco install packages.config --side-by-side'
+      - run: '.\config_external_libs.ps1'
+      - run: '.\install_cpdk.ps1'
+      - run: '.\install_platform_sdk.ps1'
       - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+        paths:
+          - chocoTemp
+        key: choco-downloads-{{ checksum "packages.config" }}
       - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: gradle-caches-{{ checksum "build.gradle" }}
-      - save_cache:
-          paths:
-            - windows/chocoTemp
-          key: choco-downloads-{{ checksum "windows/packages.config" }}
-      - store_artifacts:
-          name: 'Saving Windows build'
-          path: 'windows/build/dist/e-IDSigner-1.0.0.msi'
-          destination: ''
+        paths:
+          - external-libs
+        key: external-libs-{{ checksum "external-libs/versions.txt" }}
+      -save_cache:
+        paths:
+          - cpdk
+        key: cpdk-{{ checksum "install_cpdk.ps1" }}
+      -save_cache:
+        paths:
+          - platform_sdk
+        key: platform_sdk-{{ checksum "install_platform_sdk.ps1" }}
 workflows:
   my-workflow:
     jobs:
