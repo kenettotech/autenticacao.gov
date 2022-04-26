@@ -3,40 +3,40 @@ orbs:
   win: circleci/windows@4.1.1
 jobs:
   build:
-    working_directory: ~/project/pteid-mw-pt/windows
+    working_directory: ~/project
     executor:
       name: win/default
     steps:
       - checkout
       - restore_cache:
-          key: choco-downloads-{{ checksum "packages.config" }}
+          key: choco-downloads-{{ checksum "pteid-mw-pt/windows\packages.config" }}
       - restore_cache:
-          key: external-libs-{{ checksum "external-libs/versions.txt" }}
+          key: external-libs-{{ checksum "pteid-mw-pt/windows\external-libs/versions.txt" }}
       - restore_cache:
-          key: cpdk-{{ checksum "install_cpdk.ps1" }}
+          key: cpdk-{{ checksum "pteid-mw-pt/windows\install_cpdk.ps1" }}
       - restore_cache:
-          key: platform_sdk-{{ checksum "install_platform_sdk.ps1" }}
-      - run: 'choco config set --name "cacheLocation" --value "chocoTemp"'
-      - run: 'choco install packages.config --side-by-side'
-      - run: '.\config_external_libs.ps1'
-      - run: '.\install_cpdk.ps1'
-      - run: '.\install_platform_sdk.ps1'
+          key: platform_sdk-{{ checksum "pteid-mw-pt/windows\install_platform_sdk.ps1" }}
+      - run: 'choco config set --name "cacheLocation" --value "pteid-mw-pt/windows\chocoTemp"'
+      - run: 'choco install pteid-mw-pt/windows\packages.config --side-by-side'
+      - run: '.\pteid-mw-pt/windows\config_external_libs.ps1'
+      - run: '.\pteid-mw-pt/windows\install_cpdk.ps1'
+      - run: '.\pteid-mw-pt/windows\install_platform_sdk.ps1'
       - save_cache:
           paths:
-            - chocoTemp
-          key: choco-downloads-{{ checksum "packages.config" }}
+            - pteid-mw-pt/windows\chocoTemp
+          key: choco-downloads-{{ checksum "pteid-mw-pt/windows\packages.config" }}
       - save_cache:
           paths:
-            - external-libs
-          key: external-libs-{{ checksum "external-libs/versions.txt" }}
+            - pteid-mw-pt/windows\external-libs
+          key: external-libs-{{ checksum "pteid-mw-pt/windows\external-libs/versions.txt" }}
       - save_cache:
           paths:
-            - cpdk
-          key: cpdk-{{ checksum "install_cpdk.ps1" }}
+            - pteid-mw-pt/windows\cpdk
+          key: cpdk-{{ checksum "pteid-mw-pt/windows\install_cpdk.ps1" }}
       - save_cache:
           paths:
-            - platform_sdk
-          key: platform_sdk-{{ checksum "install_platform_sdk.ps1" }}
+            - pteid-mw-pt/windows\platform_sdk
+          key: platform_sdk-{{ checksum "pteid-mw-pt/windows\install_platform_sdk.ps1" }}
 workflows:
   my-workflow:
     jobs:
