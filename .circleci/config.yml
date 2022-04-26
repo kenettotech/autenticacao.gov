@@ -29,11 +29,11 @@ jobs:
           paths:
             - external-libs
           key: external-libs-{{ checksum "external-libs/versions.txt" }}
-      -save_cache:
+      - save_cache:
           paths:
             - cpdk
           key: cpdk-{{ checksum "install_cpdk.ps1" }}
-      -save_cache:
+      - save_cache:
           paths:
             - platform_sdk
           key: platform_sdk-{{ checksum "install_platform_sdk.ps1" }}
