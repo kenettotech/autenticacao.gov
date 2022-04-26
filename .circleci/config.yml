@@ -1,0 +1,40 @@
+version: '2.1'
+orbs:
+  win: circleci/windows@4.1.1
+jobs:
+  build:
+    working_directory: ~/project
+    executor:
+      name: win/default
+    steps:
+      - checkout
+      - restore_cache:
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: gradle-caches-{{ checksum "build.gradle" }}
+      - restore_cache:
+          key: choco-downloads-{{ checksum "windows/packages.config" }}
+      - run: 'choco config set --name "cacheLocation" --value "windows/chocoTemp"'
+      - run: 'choco install windows/packages.config'
+      - run: './gradlew wrapper ":windows:jpackage" --no-daemon'
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: gradle-caches-{{ checksum "build.gradle" }}
+      - save_cache:
+          paths:
+            - windows/chocoTemp
+          key: choco-downloads-{{ checksum "windows/packages.config" }}
+      - store_artifacts:
+          name: 'Saving Windows build'
+          path: 'windows/build/dist/e-IDSigner-1.0.0.msi'
+          destination: ''
+workflows:
+  my-workflow:
+    jobs:
+      - build
+
