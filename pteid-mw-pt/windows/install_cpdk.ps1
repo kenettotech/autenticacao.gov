@@ -1,5 +1,5 @@
 $currentLocation=Get-Location
-if (-Not Test-Path "${currentLocation}/pteid-mw-pt/windows/cpdk") {
+if (-Not (Test-Path "${currentLocation}/pteid-mw-pt/windows/cpdk")) {
 	New-Item -Path "${currentLocation}/pteid-mw-pt/windows/" -Name "cpdk" -ItemType "directory"  | Out-Null
 }
 
