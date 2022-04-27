@@ -41,19 +41,21 @@ foreach ($url in $urls) {
   $fileName = $fileNames[$i]
   $isInstaller = $installers[$i]
   $i = $i + 1
-  Write-Host "Processing file with name ${fileName}"
+  Write-Host "Processing file with name ${fileName}, will download from url ${url}"
   Invoke-WebRequest -Uri "${url}" -OutFile "${externalLibsFolder}/${fileName}" | Out-Null
   if ($isInstaller) {
-    Write-Host "Is installer"
+    Write-Host "Is installer, will try to install executable at path ${externalLibsFolder}/${fileName}"
     Start-Process -Wait -FilePath "${externalLibsFolder}/${fileName}" -Argument "/silent"
+    Write-Host "Installed executable at path ${externalLibsFolder}/${fileName}"
   } else {
-    Write-Host "Is not installer"
+    Write-Host "Is not installer, will try to expand archive at path ${externalLibsFolder}/${fileName}"
     Expand-Archive -Path "${externalLibsFolder}/${fileName}" -DestinationPath "${externalLibsFolder}/" | Out-Null
+    Write-Host "Expanded archive at path ${externalLibsFolder}/${fileName}"
   }
   Write-Host "Finished processing file with name ${fileName}"
 }
 
-#Remove-Item "${externalLibsFolder}/*" -Include *.zip,*.exe
+#Remove-Item "${externalLibsFolder}/*" -Include *.zip
 
 
 # Change the cache
