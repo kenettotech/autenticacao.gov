@@ -1,6 +1,6 @@
 $currentLocation=Get-Location
-$externalLibsFolder = "${currentLocation}/external-libs"
+$externalLibsFolder = "${currentLocation}/external-libs" | Out-Null
 
-Get-ChildItem $externalLibsFolder -Recurse -Directory | ForEach-Object -Parallel {
-  & $_/setup.ps1
-} -ThrottleLimit 4
+Get-ChildItem "${externalLibsFolder}" -Recurse -Directory | ForEach-Object {
+  & $_/setup.ps1 | Out-Null
+}
