@@ -2,7 +2,7 @@ $externalLibsFolder = "${PSScriptRoot}/external-libs"
 
 $urls = @(
   'https://curl.se/download/curl-7.82.0.zip',
-  'https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/lpng1637.zip/download',
+  'https://downloads.sourceforge.net/project/libpng/libpng16/1.6.37/lpng1637.zip?ts=gAAAAABiaSaMKuouSDZQA6yHhRXNxrFqZpViErwVDouTTPB-tWsokgtFfJ5yRRPpG755hBjOZWWYGAXAPxAzAtDzj9T9XninzA%3D%3D&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibpng%2Ffiles%2Flibpng16%2F1.6.37%2Flpng1637.zip%2Fdownload',
   'https://www.zlib.net/zlib1212.zip',
   'http://archive.apache.org/dist/santuario/c-library/xml-security-c-2.0.2.zip',
   'https://github.com/nih-at/libzip/archive/refs/tags/rel-1-5-2.zip',
