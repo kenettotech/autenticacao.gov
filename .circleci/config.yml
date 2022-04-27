@@ -8,14 +8,14 @@ jobs:
       name: win/default
     steps:
       - checkout
-      - restore_cache:
-          key: choco-downloads-{{ checksum "pteid-mw-pt/windows/packages.config" }}
-      - restore_cache:
-          key: external-libs-{{ checksum "pteid-mw-pt/windows/external-libs/versions.txt" }}
-      - restore_cache:
-          key: cpdk-{{ checksum "pteid-mw-pt/windows/install_cpdk.ps1" }}
-      - restore_cache:
-          key: platform_sdk-{{ checksum "pteid-mw-pt/windows/install_platform_sdk.ps1" }}
+      # - restore_cache:
+      #     key: choco-downloads-{{ checksum "pteid-mw-pt/windows/packages.config" }}
+      # - restore_cache:
+      #     key: external-libs-{{ checksum "pteid-mw-pt/windows/external-libs/versions.txt" }}
+      # - restore_cache:
+      #     key: cpdk-{{ checksum "pteid-mw-pt/windows/install_cpdk.ps1" }}
+      # - restore_cache:
+      #     key: platform_sdk-{{ checksum "pteid-mw-pt/windows/install_platform_sdk.ps1" }}
       - run: '.\pteid-mw-pt/windows\config_external_libs.ps1'
       - save_cache:
           paths:
