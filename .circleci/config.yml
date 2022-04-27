@@ -17,10 +17,10 @@ jobs:
       - restore_cache:
           key: platform_sdk-{{ checksum "pteid-mw-pt/windows/install_platform_sdk.ps1" }}
       - run: 'choco config set --name "cacheLocation" --value "pteid-mw-pt/windows\chocoTemp"'
-      - run: 'choco install pteid-mw-pt/windows\packages.config --side-by-side'
       - run: '.\pteid-mw-pt/windows\config_external_libs.ps1'
       - run: '.\pteid-mw-pt/windows\install_cpdk.ps1'
       - run: '.\pteid-mw-pt/windows\install_platform_sdk.ps1'
+      - run: 'choco install pteid-mw-pt/windows\packages.config --no-progress --side-by-side'
       - save_cache:
           paths:
             - pteid-mw-pt/windows\chocoTemp
