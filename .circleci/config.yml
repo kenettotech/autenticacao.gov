@@ -15,7 +15,7 @@ jobs:
       - run: '.\pteid-mw-pt/windows/config_external_libs.ps1'
       - save_cache:
           paths:
-            - pteid-mw-pt/windows/external_libs
+            - pteid-mw-pt/windows/external_libs/
           key: external-libs-downloads-{{ checksum "pteid-mw-pt/windows/config_external_libs.ps1" }}
       # - run: 'choco config set --name "cacheLocation" --value "pteid-mw-pt/windows\chocoTemp"'
       # - run: 'choco install pteid-mw-pt/windows\packages.config --no-progress --side-by-side'
