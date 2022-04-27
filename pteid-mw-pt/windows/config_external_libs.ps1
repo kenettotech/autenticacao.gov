@@ -13,14 +13,16 @@ $urls = @(
 )
 
 $urls | ForEach-Object {
-  Write-Host "Processing file with name $_.fileName"
-  Invoke-WebRequest -Uri "$_.url" -OutFile "${externalLibsFolder}/$_.fileName" | Out-Null
-  if ($_.isInstaller) {
-    Start-Process -Wait -FilePath "${externalLibsFolder}/$_.fileName" -Argument "/silent"
+  Write-Host "Processing file with name ${PSItem.fileName}"
+  Invoke-WebRequest -Uri "${PSItem.url}" -OutFile "${externalLibsFolder}/${PSItem.fileName}" | Out-Null
+  if ($PSItem.isInstaller) {
+    Write-Host "Is installer"
+    Start-Process -Wait -FilePath "${externalLibsFolder}/${PSItem.fileName}" -Argument "/silent"
   } else {
-    Expand-Archive -Path "${externalLibsFolder}/$_.fileName" -DestinationPath "${externalLibsFolder}/" | Out-Null
+    Write-Host "Is not installer"
+    Expand-Archive -Path "${externalLibsFolder}/${PSItem.fileName}" -DestinationPath "${externalLibsFolder}/" | Out-Null
   }
-  Write-Host "Finished processing file with name $_.fileName"
+  Write-Host "Finished processing file with name ${PSItem.fileName}"
 }
 
 #Remove-Item "${externalLibsFolder}/*" -Include *.zip,*.exe
