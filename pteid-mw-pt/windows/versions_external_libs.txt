@@ -1,0 +1,9 @@
+curl: 7.82.0
+libpng: 1.6.37
+zlib:1.2.12
+xml-security-c: 2.0.2
+libzip: 1.5.2
+openjpeg: 2.3.1
+xerces-c: 3.2.3
+cpdksetup: 27/04/2021
+platform_sdk_setup: 27/04/2021

@@ -46,6 +46,8 @@ foreach ($fileName in $fileNames) {
     Write-Host "Will download from url ${url}"
     Invoke-WebRequest -Uri "${url}" -OutFile "${externalLibsFolder}/${fileName}" | Out-Null
     Write-Host "Downloaded from url ${url}"
+  } else {
+    Write-Host "File ${fileName} already exists"
   }
   if ($isInstaller) {
     Write-Host "Is installer, will try to install executable at path ${externalLibsFolder}/${fileName}"
