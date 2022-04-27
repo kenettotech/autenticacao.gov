@@ -37,12 +37,16 @@ $installers = @(
 )
 
 $i = 0
-foreach ($url in $urls) {
-  $fileName = $fileNames[$i]
+foreach ($fileName in $fileNames) {
+  $url = $urls[$i]
   $isInstaller = $installers[$i]
   $i = $i + 1
-  Write-Host "Processing file with name ${fileName}, will download from url ${url}"
-  Invoke-WebRequest -Uri "${url}" -OutFile "${externalLibsFolder}/${fileName}" | Out-Null
+  Write-Host "Processing file with name ${fileName}"
+  if (-not(Test-Path -Path "${externalLibsFolder}/${fileName}" -PathType Leaf)) {
+    Write-Host "Will download from url ${url}"
+    Invoke-WebRequest -Uri "${url}" -OutFile "${externalLibsFolder}/${fileName}" | Out-Null
+    Write-Host "Downloaded from url ${url}"
+  }
   if ($isInstaller) {
     Write-Host "Is installer, will try to install executable at path ${externalLibsFolder}/${fileName}"
     Start-Process -Wait -FilePath "${externalLibsFolder}/${fileName}" -Argument "/silent"
