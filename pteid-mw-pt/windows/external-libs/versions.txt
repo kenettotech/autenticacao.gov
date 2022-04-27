@@ -1,9 +1,0 @@
-xml-security-c=2.0.2
-zlib=1212
-xerces=3.2.3
-openjpeg=2.3.1
-libzip=1.5.2
-libpng=1.6.37
-libcurl=7.82.0
-
-# Trigger new cache
