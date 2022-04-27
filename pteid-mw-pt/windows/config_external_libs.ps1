@@ -13,12 +13,14 @@ $urls = @(
 )
 
 $urls | ForEach-Object {
+  Write-Host "Processing file with name $_.fileName"
   Invoke-WebRequest -Uri "$_.url" -OutFile "${externalLibsFolder}/$_.fileName" | Out-Null
   if ($_.isInstaller) {
     Start-Process -Wait -FilePath "${externalLibsFolder}/$_.fileName" -Argument "/silent"
   } else {
     Expand-Archive -Path "${externalLibsFolder}/$_.fileName" -DestinationPath "${externalLibsFolder}/" | Out-Null
   }
+  Write-Host "Finished processing file with name $_.fileName"
 }
 
 #Remove-Item "${externalLibsFolder}/*" -Include *.zip,*.exe
